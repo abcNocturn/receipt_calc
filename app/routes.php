@@ -10,8 +10,25 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+//Starseite
+Route::get(
+    '/',
+    function () {
+        return View::make('hello');
+    }
+);
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+
+//Wichtige Models
+Route::model('user', 'User');
+Route::model('bon', 'Bon');
+
+
+Route::group(
+    array('prefix' => 'api/v1'),
+    function () {
+        Route::controller('user', 'UserController');
+        Route::controller('bon', 'BonController');
+    }
+);
+
