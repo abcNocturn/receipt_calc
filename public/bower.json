@@ -1,0 +1,19 @@
+{
+  "name": "bonrechner",
+  "version": "0.0.1",
+  "authors": [
+    "dkrueger <daniel.krueger@h3-netservice.de>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.11.0"
+  }
+}
