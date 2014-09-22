@@ -71,4 +71,6 @@ require $framework.'/Illuminate/Foundation/start.php';
 |
 */
 
+include('helpers.php');
+
 return $app;

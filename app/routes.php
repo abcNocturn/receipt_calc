@@ -1,29 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-//Starseite
-Route::get(
-    '/',
-    function () {
-        return View::make('hello');
-    }
-);
+//We will have only a few Pages, so only one Page Controller
+Route::controller('page', 'PageController');
 
 
-//Wichtige Models
-Route::model('user', 'User');
-Route::model('bon', 'Bon');
-
-
+//Here are our Api Calls
 Route::group(
     array('prefix' => 'api/v1'),
     function () {
@@ -31,4 +12,15 @@ Route::group(
         Route::controller('bon', 'BonController');
     }
 );
+
+//Catch if page is missing
+//Not the most beatiful way, but in our Tool it's fine :)
+App::missing(function ($exception) {
+    if ( Route::getCurrentRoute()->getParameter('_missing')[0] == 'api' ) {
+        return Response::json(array("throw_error"=>"Page unknown"));
+    };
+    return Redirect::action('PageController@getIndex');
+});
+
+
 
