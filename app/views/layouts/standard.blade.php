@@ -17,14 +17,11 @@
 
 	<style>
 	</style>
+	<script>
+	    var laravelConfig = {"url_to": "{{URL::to('/');}}"};
+	</script>
 </head>
 <body>
-
-    <!-- Anuglar configs-->
-    <app-config  ng-controller="ConfigController"
-        rootURL="{{URL::to('/');}}">
-    </app-config>
-
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">

@@ -6,13 +6,27 @@
                   <div class="form-group">
                         <label for="userselect">User:</label>
                         <select name="userselect" id="userselect" class="form-control"
-                        ng-model="selectedUser" ng-options="user.id as user.name for user in userlist">
+                        ng-model="selectedUser"
+                        ng-options="user.id as user.name for user in userlist"
+                        ng-change="getLastBons(selectedUser,false)">
                             <option value="">-- Benutzer wählen --</option>
                         </select>
                   </div>
                   <div class="form-group">
                         <label for="amount">Betrag:</label>
-                        <input type="text" name="amount" id="amount" class="form-control" placeholder="bsp. 10.16" />
+                        <input type="text" name="amount" id="amount" class="form-control" placeholder="bsp. 10.16"
+                        ng-model="amount" />
+                  </div>
+
+                    @include('elements.dateRangePicker',array('datePicker'=>array('attribute'=>'pickdate','headline'=>'Datum')))
+
+                    <div class="row-fluid text-center">
+                        <div class="col-md-12">&nbsp;</div>
+                    </div>
+
+                  <div class="form-group">
+                    <button type="button" class="btn btn-success"
+                    ng-click="saveBon(selectedUser,amount,dateRangePicker.pickdate.year+'-'+dateRangePicker.pickdate.month+'-'+dateRangePicker.pickdate.day+' 12:00:00')">Speichern</button>
                   </div>
             </div>
         </div>
@@ -30,9 +44,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="bon in bons">
-                            <td width="50%"> [{bon.date}] </td>
-                            <td width="50%"> [{bon.value}] </td>
+                        <tr ng-repeat="bon in lastBons">
+                            <td width="40%"> [{bon.date | dateToISO | date:'shortDate'}] </td>
+                            <td width="40%"> [{bon.value}] </td>
+                            <td width="20%" style="cursor:pointer;"
+                            ng-click="deleteBon(bon.id)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

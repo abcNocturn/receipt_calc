@@ -5,8 +5,9 @@ var receiptCalc = angular.module('receiptCalc', [], function ($interpolateProvid
 
 receiptCalc.filter('dateToISO', function() {
     return function(input) {
-        input = new Date(input).toISOString();
-        return input;
+        var date = new Date(input);
+        //return date.toISOString();
+        return date.getDate()+"."+(date.getMonth()+1)+"."+date.getFullYear();
     };
 });
 
@@ -37,10 +38,10 @@ receiptCalc.controller('insertBonController',function ($scope, $http) {
             });
     };
 
-    $scope.saveBon = function ($userid, $amount) {
+    $scope.saveBon = function ($userid,$amount,$date) {
         $http.post(
             laravelConfig.url_to + "/api/v1/bon/insert",
-            {"userid": $userid, "value": $amount}
+            {"userid": $userid, "value": $amount, "date": $date}
         )
             .error(function ($response) {
                 alert("Keine Bons gefunden" + $response);
@@ -61,5 +62,9 @@ receiptCalc.controller('insertBonController',function ($scope, $http) {
                 $scope.getLastBons($scope.selectedUser, $scope.lastBonsLimit);
             });
     };
+
+});
+
+receiptCalc.controller('getStatisticsController',function ($scope, $http) {
 
 });

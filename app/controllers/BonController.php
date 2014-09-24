@@ -6,8 +6,8 @@ class BonController extends \BaseController
     public function getBonLast($userId, $count = 10)
     {
         return Response::json(
-            Bon::orderBy('created_at', 'desc')
-                ->where('user_id','=',$userId)
+            Bon::where('user_id','=',$userId)
+                ->orderBy('date', 'desc')
                 ->get()
                 ->take($count)
         );
@@ -28,17 +28,31 @@ class BonController extends \BaseController
     }
 
 
-    public function postInsert($value, $user_id, $date = null)
+    public function postInsert()
     {
-        $date = Request::get('date');
+        $userid = Input::get('userid');
+        $value = Input::get('value');
+        $date = Input::get('date');
         if ($date == null) {
             $date = date('Y-m-d H:i:s');
         }
+        if ($value == null) {
+            return Response::json(array("error"=>"NO VALUE"));
+        }
+        if ($userid == null) {
+            return Response::json(array("error"=>"NO USERID"));
+        }
         $bon = new Bon;
         $bon->date = $date;
-        $bon->value = Request::get('value');
-        $bon->user_id = Request::get('user_id');
+        $bon->value = $value;
+        $bon->user_id = $userid;
         return Response::json($bon->save());
+    }
+
+
+    public function deleteDelete($bonid)
+    {
+        return Response::json(Bon::destroy($bonid));
     }
 
 }
