@@ -67,4 +67,16 @@ receiptCalc.controller('insertBonController',function ($scope, $http) {
 
 receiptCalc.controller('getStatisticsController',function ($scope, $http) {
 
+
+    $scope.getStatistics = function ($date1, $date2) {
+        $http.get(laravelConfig.url_to + "/api/v1/stats/date-range-stats/" + $date1 + "/" + $date2)
+            .error(function ($response) {
+                alert("Keine Bons gefunden" + $response);
+            })
+            .success(function ($response) {
+                console.log($response);
+                $scope.lastBons = $response;
+            });
+        $scope.showResult = true;
+    };
 });

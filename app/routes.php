@@ -10,6 +10,7 @@ Route::group(
     function () {
         Route::controller('user', 'UserController');
         Route::controller('bon', 'BonController');
+        Route::controller('stats', 'StatsController');
     }
 );
 
