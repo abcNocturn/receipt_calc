@@ -18,7 +18,7 @@
                         ng-model="amount" />
                   </div>
 
-                    @include('elements.dateRangePicker',array('datePicker'=>array('attribute'=>'pickdate','headline'=>'Datum')))
+                    @include('elements.datePicker',array('datePicker'=>array('attribute'=>'pickdate','headline'=>'Datum')))
 
                     <div class="row-fluid text-center">
                         <div class="col-md-12">&nbsp;</div>
@@ -26,7 +26,7 @@
 
                   <div class="form-group">
                     <button type="button" class="btn btn-success"
-                    ng-click="saveBon(selectedUser,amount,dateRangePicker.pickdate.year+'-'+dateRangePicker.pickdate.month+'-'+dateRangePicker.pickdate.day+' 12:00:00')">Speichern</button>
+                    ng-click="saveBon(selectedUser,amount,datePicker.pickdate.year+'-'+datePicker.pickdate.month+'-'+datePicker.pickdate.day+' 12:00:00')">Speichern</button>
                   </div>
             </div>
         </div>

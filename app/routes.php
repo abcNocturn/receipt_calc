@@ -17,8 +17,10 @@ Route::group(
 //Catch if page is missing
 //Not the most beatiful way, but in our Tool it's fine :)
 App::missing(function ($exception) {
-    if ( Route::getCurrentRoute()->getParameter('_missing')[0] == 'api' ) {
-        return Response::json(array("throw_error"=>"Page unknown"));
+    if ( Route::getCurrentRoute() != null ) {
+        if ( Route::getCurrentRoute()->getParameter('_missing')[0] == 'api' ) {
+            return Response::json(array("throw_error"=>"Page unknown"));
+        }
     };
     return Redirect::action('PageController@getIndex');
 });
