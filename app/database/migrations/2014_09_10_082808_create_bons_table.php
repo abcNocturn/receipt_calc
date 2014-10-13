@@ -18,7 +18,7 @@ class CreateBonsTable extends Migration {
                 $table->integer('user_id')->unsigned();
                 $table->foreign('user_id')->references('id')->on('users');
                 $table->datetime('date')->index();
-                $table->float('value');
+                $table->double('value');
                 $table->timestamps();
 
             });

@@ -1,4 +1,4 @@
-@section('content')
+<?php $__env->startSection('content'); ?>
 <form name="insertBon" ng-controller="insertBonController" ng-submit="saveBon(selectedUser,amount,datePicker.pickdate.year+'-'+datePicker.pickdate.month+'-'+datePicker.pickdate.day+' 12:00:00')">
     <div class="container-fluid">
         <div class="row-fluid text-center">
@@ -20,7 +20,7 @@
                         />
                   </div>
 
-                    @include('elements.datePicker',array('datePicker'=>array('attribute'=>'pickdate','headline'=>'Datum')))
+                    <?php echo $__env->make('elements.datePicker',array('datePicker'=>array('attribute'=>'pickdate','headline'=>'Datum')), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
                     <div class="row-fluid text-center">
                         <div class="col-md-12">&nbsp;</div>
@@ -59,4 +59,4 @@
         </div>
     </div>
 </form>
-@stop
+<?php $__env->stopSection(); ?>

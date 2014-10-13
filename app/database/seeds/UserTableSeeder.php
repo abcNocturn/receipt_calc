@@ -7,11 +7,11 @@ class UserTableSeeder extends Seeder {
         DB::table('users')->delete();
 
         User::create(array(
-            'name' => 'Pia'
+            'name' => 'Kullerkeks'
         ));
 
         User::create(array(
-            'name' => 'Daniel'
+            'name' => 'Kuschelbär'
         ));
 
     }

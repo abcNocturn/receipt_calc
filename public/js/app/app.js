@@ -28,6 +28,7 @@ receiptCalc.controller('insertBonController',function ($scope, $http) {
         if ($count == false) {
             $count = $scope.lastBonsLimit;
         }
+        console.log(laravelConfig.url_to + "/api/v1/bon/bon-last/" + $userid + "/" + $count);
         $http.get(laravelConfig.url_to + "/api/v1/bon/bon-last/" + $userid + "/" + $count)
             .error(function ($response) {
                 alert("Keine Bons gefunden" + $response);
@@ -39,6 +40,7 @@ receiptCalc.controller('insertBonController',function ($scope, $http) {
     };
 
     $scope.saveBon = function ($userid,$amount,$date) {
+        $amount = $amount.replace(",",".");
         $http.post(
             laravelConfig.url_to + "/api/v1/bon/insert",
             {"userid": $userid, "value": $amount, "date": $date}
@@ -47,6 +49,7 @@ receiptCalc.controller('insertBonController',function ($scope, $http) {
                 alert("Keine Bons gefunden" + $response);
             })
             .success(function ($response) {
+                $scope.amount = "" ;
                 $scope.getLastBons($userid, $scope.lastBonsLimit);
             });
     };

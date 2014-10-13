@@ -7,7 +7,7 @@ class BonController extends \BaseController
     {
         return Response::json(
             Bon::where('user_id','=',$userId)
-                ->orderBy('date', 'desc')
+                ->orderBy('id', 'desc')
                 ->get()
                 ->take($count)
         );
